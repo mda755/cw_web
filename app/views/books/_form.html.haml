@@ -1,0 +1,32 @@
+= form_for @book do |f|
+  - if @book.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@book.errors.count, "error")} prohibited this book from being saved:"
+      %ul
+        - @book.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :part
+    = f.number_field :part
+  .field
+    = f.label :isbn
+    = f.number_field :isbn
+  .field
+    = f.label :print_year
+    = f.number_field :print_year
+  .field
+    = f.label :stillage
+    = f.select(:stillage_id, options_for_select(Stillage.pluck('index, id'), f.object.stillage_id))
+    / Stillage.pluck('index, id') => remake this shit
+  .field
+    = f.label :shelf
+    = f.number_field :shelf
+  .field
+    = f.label :copies
+    = f.number_field :copies
+  .actions
+    = f.submit 'Save'

@@ -1,0 +1,16 @@
+= form_for @stillage do |f|
+  - if @stillage.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@stillage.errors.count, "error")} prohibited this stillage from being saved:"
+      %ul
+        - @stillage.errors.full_messages.each do |message|
+          %li= message
+
+  .field
+    = f.label :index
+    = f.number_field :index
+  .field
+    = f.label :hall
+    = f.select(:hall_id, options_for_select(Hall.pluck('name_full, id'), f.object.hall_id))
+  .actions
+    = f.submit 'Save'

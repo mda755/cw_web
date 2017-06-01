@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b= Hall.human_attribute_name(:name_full)
+  = @hall.name_full
+%p
+  %b= Hall.human_attribute_name(:name_short)
+  = @hall.name_short
+
+= link_to 'Edit', edit_hall_path(@hall)
+\|
+= link_to 'Back', halls_path

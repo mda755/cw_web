@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b= Stillage.human_attribute_name(:index)
+  = @stillage.index
+%p
+  %b= Stillage.human_attribute_name(:hall)
+  = @stillage.hall.name_full + ' (' + @stillage.hall.name_short + ')'
+
+= link_to 'Edit', edit_stillage_path(@stillage)
+\|
+= link_to 'Back', stillages_path

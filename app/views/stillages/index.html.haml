@@ -1,0 +1,23 @@
+%h1= t('headers.stillages.index')
+
+%table
+  %thead
+    %tr
+      %th= Stillage.human_attribute_name(:index)
+      %th= Stillage.human_attribute_name(:hall)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @stillages.each do |stillage|
+      %tr
+        %td= stillage.index
+        %td= stillage.hall.name_full + ' (' + stillage.hall.name_short + ')'
+        %td= link_to 'Show', stillage
+        %td= link_to 'Edit', edit_stillage_path(stillage)
+        %td= link_to 'Destroy', stillage, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Stillage', new_stillage_path

@@ -1,0 +1,33 @@
+%h1= t('headers.books.index')
+
+%table
+  %thead
+    %tr
+      %th= Book.human_attribute_name(:name)
+      %th= Book.human_attribute_name(:part)
+      %th= Book.human_attribute_name(:isbn)
+      %th= Book.human_attribute_name(:print_year)
+      %th= Book.human_attribute_name(:stillage)
+      %th= Book.human_attribute_name(:shelf)
+      %th= Book.human_attribute_name(:copies)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @books.each do |book|
+      %tr
+        %td= book.name
+        %td= book.part
+        %td= book.isbn
+        %td= book.print_year
+        %td= book.stillage.index
+        %td= book.shelf
+        %td= book.copies
+        %td= link_to 'Show', book
+        %td= link_to 'Edit', edit_book_path(book)
+        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Book', new_book_path

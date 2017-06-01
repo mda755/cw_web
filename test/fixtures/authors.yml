@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  fname: MyText
+  sname: MyText
+  lname: MyText
+  index: 1
+
+two:
+  fname: MyText
+  sname: MyText
+  lname: MyText
+  index: 1

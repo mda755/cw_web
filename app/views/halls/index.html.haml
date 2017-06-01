@@ -1,0 +1,23 @@
+%h1= t('headers.halls.index')
+
+%table
+  %thead
+    %tr
+      %th= Hall.human_attribute_name(:name_full)
+      %th= Hall.human_attribute_name(:name_short)
+      %th
+      %th
+      %th
+
+  %tbody
+    - @halls.each do |hall|
+      %tr
+        %td= hall.name_full
+        %td= hall.name_short
+        %td= link_to 'Show', hall
+        %td= link_to 'Edit', edit_hall_path(hall)
+        %td= link_to 'Destroy', hall, method: :delete, data: { confirm: 'Are you sure?' }
+
+%br
+
+= link_to 'New Hall', new_hall_path

@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b= Author.human_attribute_name(:fname)
+  = @author.fname
+%p
+  %b= Author.human_attribute_name(:sname)
+  = @author.sname
+%p
+  %b= Author.human_attribute_name(:lname)
+  = @author.lname
+%p
+  %b= Author.human_attribute_name(:index)
+  = @author.index
+
+= link_to 'Edit', edit_author_path(@author)
+\|
+= link_to 'Back', authors_path

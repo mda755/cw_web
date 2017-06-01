@@ -28,6 +28,28 @@ ru:
       index: Список возможных ролей пользователей
       edit: Редактирование роли
       new: Новая роль
+    # b1
+    authors:
+      index: Список всех авторов
+      edit: Редактирование автора
+      new: Новый автор
+    author_lists:
+      index: Возможные списки авторов для книг
+      edit: Редактирование связи #?
+      new: Новый автор для книги
+    books:
+      index: Список книг
+      edit: Редактирование книги
+      new: Новая книга
+    halls:
+      index: Список залов
+      edit: Редактирование зала
+      new: Новый зал
+    stillages:
+      index: Список стеллажей
+      edit: Редактирование стеллажа
+      new: Новый стеллаж
+    # b1 end
   views:
     pagination:
       first: ⇤
@@ -49,10 +71,30 @@ ru:
         activation_token_expires_at: Дата прекращения действия токена активации
         last_login_at: Время последнего входа в систему
         role_users: Роли
-      role: 
-        name: Обозначение
-        info: Краткое название
-        full_info: Описание
+      # b1
+      author: 
+        fname: Имя
+        sname: Отчество
+        lname: Фамилия
+        index: Авторский индекс
+      author_list: 
+        author: Автор
+        book: Книга
+      book: 
+        name: Название
+        part: Том / Часть
+        isbn: Индекс ISBN
+        print_year: Год издания
+        stillage: Индекс стеллажа
+        shelf: Номер полки
+        copies: Количество экземпляров
+      hall: 
+        name_full: Полное название
+        name_short: Краткое название
+      stillage: 
+        index: Индекс
+        hall: Зал
+      # b1 end
       # nested_start
       role_user: &role_users
       # nested_finish

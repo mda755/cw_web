@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  part: 1
+  isbn: 1
+  print_year: 1
+  stillage_id: 
+  shelf: 1
+  copies: 1
+
+two:
+  name: MyText
+  part: 1
+  isbn: 1
+  print_year: 1
+  stillage_id: 
+  shelf: 1
+  copies: 1

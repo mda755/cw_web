@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b= Book.human_attribute_name(:name)
+  = @book.name
+%p
+  %b= Book.human_attribute_name(:part)
+  = @book.part
+%p
+  %b= Book.human_attribute_name(:isbn)
+  = @book.isbn
+%p
+  %b= Book.human_attribute_name(:print_year)
+  = @book.print_year
+%p
+  %b= Book.human_attribute_name(:stillage)
+  = @book.stillage.index
+%p
+  %b= Book.human_attribute_name(:shelf)
+  = @book.shelf
+%p
+  %b= Book.human_attribute_name(:copies)
+  = @book.copies
+
+= link_to 'Edit', edit_book_path(@book)
+\|
+= link_to 'Back', books_path
