@@ -1,10 +1,19 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-  skip_before_action :check_app_auth, only: [:index, :show]
+  skip_before_action :check_app_auth, only: [:index, :show, :search]
   # GET /books
   # GET /books.json
   def index
     @books = Book.all
+  end
+
+  def search
+    if params.has_key?('search')
+      @books = Book.search(params['search'])
+    else
+      @books = []
+    end
+    params['search'] ||= {}
   end
 
   # GET /books/1

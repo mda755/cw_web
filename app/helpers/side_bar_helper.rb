@@ -38,6 +38,12 @@ module SideBarHelper
       :controller => :stillages, 
       :action => :index
     }
+    result << {
+      :name => 'Поиск',
+      :icon => 'search',
+      :controller => :books, 
+      :action => :search
+    }
 
     result << {
       :name => 'Администрирование',

@@ -1,0 +1,87 @@
+=breadcrumb_tag do
+  %li.active
+    Поиск
+  %li
+    =link_to t('headers.books.index'), books_path
+  %li
+    Библиотека
+
+.page-header
+  %h1 Поиск
+
+= form_tag search_books_path(), method: :get do
+  %h3
+  .row
+    .col-md-6
+      .form-group
+        = Book.human_attribute_name(:name)
+        = text_field_tag 'search[name]', params['search']['name'],class: 'form-control'
+    .col-md-6
+      .form-group
+        = Book.human_attribute_name(:isbn)
+        = number_field_tag 'search[isbn]', params['search']['isbn'],class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = Book.human_attribute_name(:print_year)
+        = number_field_tag 'search[print_year]', params['search']['print_year'],class: 'form-control'
+    .col-md-6
+      .form-group
+        = Book.human_attribute_name(:copies)
+        = number_field_tag 'search[copies]', params['search']['copies'],class: 'form-control'
+  .row      
+    .col-md-4
+      .form-group
+        = Book.human_attribute_name(:stillage)
+        = number_field_tag 'search[stillage]', params['search']['stillage'],class: 'form-control'
+    .col-md-4
+      .form-group
+        = Hall.human_attribute_name(:name_full)
+        = text_field_tag 'search[name_full]', params['search']['name_full'],class: 'form-control'
+    .col-md-4
+      .form-group
+        = Hall.human_attribute_name(:name_short)
+        = text_field_tag 'search[name_short]', params['search']['name_short'],class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = Author.human_attribute_name(:index)
+        = text_field_tag 'search[index]', params['search']['index'],class: 'form-control'
+    .col-md-6
+      .form-group
+        = Author.human_attribute_name(:fname)
+        = text_field_tag 'search[fname]', params['search']['fname'],class: 'form-control'
+  .row
+    .col-md-6
+      .form-group
+        = Author.human_attribute_name(:sname)
+        = text_field_tag 'search[sname]', params['search']['sname'],class: 'form-control'
+    .col-md-6
+      .form-group
+        = Author.human_attribute_name(:lname)
+        = text_field_tag 'search[lname]', params['search']['lname'],class: 'form-control'
+  .actions
+    = submit_tag 'Поиск', class: 'bnt btn-primary'
+.page-header
+  %h1 Результаты поиска
+- if @books.size > 0
+  .row
+    - @books.each do |book|
+      .col-md-4
+        .form-group
+          .well
+            %dl
+              %dt= Book.human_attribute_name(:isbn)
+              %dd= book.isbn
+              %dt= Book.human_attribute_name(:name)
+              %dd= book.name
+              %dt= Book.human_attribute_name(:part)
+              %dd= book.part
+              %dt= Book.human_attribute_name(:print_year)
+              %dd= book.print_year
+              %dt= Book.human_attribute_name(:shelf)
+              %dd= book.shelf
+              %dt= Book.human_attribute_name(:stillage)
+              %dd= book.stillage_id
+              %dt= Book.human_attribute_name(:copies)
+              %dd= book.copies
