@@ -6,27 +6,50 @@
         - @book.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :part
-    = f.number_field :part
-  .field
-    = f.label :isbn
-    = f.number_field :isbn
-  .field
-    = f.label :print_year
-    = f.number_field :print_year
-  .field
-    = f.label :stillage
-    = f.select(:stillage_id, options_for_select(Stillage.pluck('index, id'), f.object.stillage_id))
-    / Stillage.pluck('index, id') => remake this shit
-  .field
-    = f.label :shelf
-    = f.number_field :shelf
-  .field
-    = f.label :copies
-    = f.number_field :copies
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-md-4
+      .form-group
+        = f.label :name
+        = f.text_field :name, class: 'form-control'
+    .col-md-2
+      .form-group
+        = f.label :part
+        = f.number_field :part, class: 'form-control'
+    .col-md-3
+      .form-group
+        = f.label :isbn
+        = f.number_field :isbn, class: 'form-control'
+    .col-md-3
+      .form-group
+        = f.label :print_year
+        = f.number_field :print_year, class: 'form-control'
+  .row
+    .col-md-4
+      .form-group
+        = f.label :stillage
+        = f.select(:stillage_id, options_for_select(Stillage.pluck('index, id'), f.object.stillage_id), {}, {class: 'form-control'})
+    .col-md-4
+      .form-group
+        = f.label :shelf
+        = f.number_field :shelf, class: 'form-control'
+    .col-md-4
+      .form-group
+        = f.label :copies
+        = f.number_field :copies, class: 'form-control'
+  .row
+    .col-md-12
+      .form-group
+        %b Выберите зарегистрированных авторов
+        %i (для выбора нескольких зажмите ctrl)
+      .form-group
+        = f.select :authors, options_for_select(author_options(f.object)), {:prompt => ""}, {:multiple => true, class: 'form-control'}
+      .row.bottom20
+        .col-md-12
+          = link_to_add_author(f, f.object)
+      .form-group
+        = f.fields_for :author_lists do |df|
+          - i = 0
+          = df.hidden_field :id
+          = render('author_list_form', df: df, i: i + 1)
+  .form-actions.bottom20
+    = f.submit nil, class: 'btn btn-primary'

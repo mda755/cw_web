@@ -1,6 +1,17 @@
-%h1= t('headers.books.index')
+=breadcrumb_tag do
+  %li.active
+    = t('headers.books.index')
+  %li
+    Библиотека
 
-%table
+.page-header
+  %h1= t('headers.books.index')
+
+%table.table.table-hover.table-striped
+  %caption
+    = link_to new_book_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.book') 
   %thead
     %tr
       %th= Book.human_attribute_name(:name)
@@ -17,17 +28,24 @@
   %tbody
     - @books.each do |book|
       %tr
-        %td= book.name
-        %td= book.part
-        %td= book.isbn
-        %td= book.print_year
-        %td= book.stillage.index
-        %td= book.shelf
-        %td= book.copies
-        %td= link_to 'Show', book
-        %td= link_to 'Edit', edit_book_path(book)
-        %td= link_to 'Destroy', book, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.center= book.name
+        %td.center= book.part
+        %td.center= book.isbn
+        %td.center= book.print_year
+        %td.center= book.stillage.index
+        %td.center= book.shelf
+        %td.center= book.copies
+        %td.right
+          = link_to book, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')
+          = link_to edit_book_path(book), class: 'btn btn-info' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to book, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.book') }, 
+          class: 'btn btn-danger' do
+            = fa_icon :times
+            = t('buttons.destroy')
 
 %br
-
-= link_to 'New Book', new_book_path

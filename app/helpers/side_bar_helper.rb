@@ -8,33 +8,33 @@ module SideBarHelper
       :action => :index
     }
 
-    result << {
-      :name => 'Списки авторов',
-      :icon => 'list',
-      :controller => :author_lists, 
-      :action => :index
-    }
-    result << {
-      :name => 'Авторы',
-      :icon => 'list',
-      :controller => :authors, 
-      :action => :index
-    }
+    # result << {
+    #   :name => 'Списки авторов',
+    #   :icon => 'list',
+    #   :controller => :author_lists, 
+    #   :action => :index
+    # }
+    # result << {
+    #   :name => 'Авторы',
+    #   :icon => 'list',
+    #   :controller => :authors, 
+    #   :action => :index
+    # }
     result << {
       :name => 'Книги',
-      :icon => 'list',
+      :icon => 'book',
       :controller => :books, 
       :action => :index
     }
-    result << {
-      :name => 'Залы',
-      :icon => 'list',
-      :controller => :halls, 
-      :action => :index
-    }
+    # result << {
+    #   :name => 'Залы',
+    #   :icon => 'list',
+    #   :controller => :halls, 
+    #   :action => :index
+    # }
     result << {
       :name => 'Стеллажи',
-      :icon => 'list',
+      :icon => 'inbox',
       :controller => :stillages, 
       :action => :index
     }

@@ -6,11 +6,35 @@
         - @stillage.errors.full_messages.each do |message|
           %li= message
 
-  .field
-    = f.label :index
-    = f.number_field :index
-  .field
-    = f.label :hall
-    = f.select(:hall_id, options_for_select(Hall.pluck('name_full, id'), f.object.hall_id))
-  .actions
-    = f.submit 'Save'
+  .row
+    .col-md-6
+      .form-group
+        = f.label :hall
+        = f.select(:hall_id, options_for_select(hall_options, f.object.hall_id), {include_blank: true}, {class: 'form-control hall_select', onchange: 'update_fields(this)'})
+    .col-md-6
+      .form-group
+        = f.label :index
+        = f.number_field :index, class: 'form-control'
+  .row 
+    = f.fields_for :hall, f.object.hall || f.object.build_hall do |hall|
+      = hall.hidden_field :id, class: 'hall_id'
+      .col-md-6
+        .form-group
+          = hall.label :name_full
+          = hall.text_field :name_full, class: 'form-control name_full'
+          = hall.error_messages_for(:name_full)
+      .col-md-6
+        .form-group
+          = hall.label :name_short
+          = hall.text_field :name_short, class: 'form-control name_short'
+          = hall.error_messages_for(:name_short)
+  - if params[:action] == 'edit'
+    - if !f.object.new_record?
+      = link_to @stillage.hall,
+      :method => :delete,
+      :data => { :confirm => t('buttons.confirm.hall') },
+      class: 'btn btn-danger' do
+        = fa_icon :times
+        = t('buttons.destroy')
+  .form-actions.bottom20
+    = f.submit nil, class: 'btn btn-primary'

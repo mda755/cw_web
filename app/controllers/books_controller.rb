@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :check_app_auth, only: [:index, :show]
   # GET /books
   # GET /books.json
   def index
@@ -15,19 +15,25 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @book.authors.build
+    @author = Author.all
   end
 
   # GET /books/1/edit
   def edit
+    @book.authors.build
+    @author = Author.all
   end
 
   # POST /books
   # POST /books.json
   def create
     @book = Book.new(book_params)
-
+    @authors = []
+    params[:book][:authors].each{|a| @authors << Author.find(a) if a.present?}
     respond_to do |format|
       if @book.save
+        @authors.each{|a| a.books << @book if !(@book.authors.include?(@author))}
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
         format.json { render :show, status: :created, location: @book }
       else
@@ -39,9 +45,12 @@ class BooksController < ApplicationController
 
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
-  def update
+   def update
+    @authors = []
+    params[:book][:authors].each{|a| @authors << Author.find(a) if a.present?}
     respond_to do |format|
       if @book.update(book_params)
+        @authors.each{|a| a.books << @book if !(@book.authors.include?(@author))}
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
         format.json { render :show, status: :ok, location: @book }
       else
@@ -69,6 +78,8 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:name, :part, :isbn, :print_year, :stillage_id, :shelf, :copies)
+      params.require(:book).permit(:name, :part, :isbn, :print_year, :stillage_id, :shelf, :copies,
+        author_lists_attributes: [:id, :_destroy, :author_id, :book_id, 
+        author_attributes: [:id, :_destroy, :fname, :sname, :lname, :index]])
     end
 end

@@ -1,4 +1,13 @@
-%p#notice= notice
+=breadcrumb_tag do
+  %li.active
+    = @stillage.index.to_s() + ' в ' + @stillage.hall.name_full + ' (' + @stillage.hall.name_short + ')'
+  %li
+    = link_to t('headers.stillages.index'), stillages_path()
+  %li
+    Библиотека
+
+.page-header
+  %h1= @stillage.index.to_s() + ' в ' + @stillage.hall.name_full + ' (' + @stillage.hall.name_short + ')'
 
 %p
   %b= Stillage.human_attribute_name(:index)
@@ -6,7 +15,3 @@
 %p
   %b= Stillage.human_attribute_name(:hall)
   = @stillage.hall.name_full + ' (' + @stillage.hall.name_short + ')'
-
-= link_to 'Edit', edit_stillage_path(@stillage)
-\|
-= link_to 'Back', stillages_path

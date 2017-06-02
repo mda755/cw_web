@@ -1,6 +1,17 @@
-%h1= t('headers.stillages.index')
+=breadcrumb_tag do
+  %li.active
+    = t('headers.stillages.index')
+  %li
+    Библиотека
 
-%table
+.page-header
+  %h1= t('headers.stillages.index')
+
+%table.table.table-hover.table-striped
+  %caption
+    = link_to new_stillage_path, class: 'btn btn-success' do
+      = fa_icon :plus
+      = t('buttons.new.stillage') 
   %thead
     %tr
       %th= Stillage.human_attribute_name(:index)
@@ -12,12 +23,19 @@
   %tbody
     - @stillages.each do |stillage|
       %tr
-        %td= stillage.index
-        %td= stillage.hall.name_full + ' (' + stillage.hall.name_short + ')'
-        %td= link_to 'Show', stillage
-        %td= link_to 'Edit', edit_stillage_path(stillage)
-        %td= link_to 'Destroy', stillage, method: :delete, data: { confirm: 'Are you sure?' }
+        %td.center= stillage.index
+        %td.center= stillage.hall.name_full + ' (' + stillage.hall.name_short + ')'
+        %td.right
+          = link_to stillage, class: 'btn btn-warning' do
+            = fa_icon :eye
+            = t('buttons.show')
+          = link_to edit_stillage_path(stillage), class: 'btn btn-info' do
+            = fa_icon :edit
+            = t('buttons.edit')
+          = link_to stillage, :method => :delete, 
+          :data => { :confirm => t('buttons.confirm.stillage') }, 
+          class: 'btn btn-danger' do
+            = fa_icon :times
+            = t('buttons.destroy')
 
 %br
-
-= link_to 'New Stillage', new_stillage_path

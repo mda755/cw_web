@@ -1,5 +1,6 @@
 class StillagesController < ApplicationController
   before_action :set_stillage, only: [:show, :edit, :update, :destroy]
+  skip_before_action :check_app_auth, only: [:index, :show]
 
   # GET /stillages
   # GET /stillages.json
@@ -69,6 +70,7 @@ class StillagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def stillage_params
-      params.require(:stillage).permit(:index, :hall_id)
+      params.require(:stillage).permit(:index, :hall_id, 
+        hall_attributes: [:name_full, :name_short, :id])
     end
 end

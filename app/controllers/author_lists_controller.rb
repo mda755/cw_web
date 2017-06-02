@@ -1,6 +1,6 @@
 class AuthorListsController < ApplicationController
   before_action :set_author_list, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_app_auth
   # GET /author_lists
   # GET /author_lists.json
   def index
@@ -69,6 +69,7 @@ class AuthorListsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_list_params
-      params.require(:author_list).permit(:author_id, :book_id)
+      params.require(:author_list).permit(:author_id, :book_id, 
+        author_attributes: [:id, :_destroy, :fname, :sname, :lname, :index])
     end
 end

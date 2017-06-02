@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  resources :author_lists
+  #resources :author_lists
   resources :books
-  resources :authors
+  #resources :authors
   resources :stillages
-  resources :halls
+  #resources :halls
   resources :role_users
   resources :roles
   resources :password_resets
