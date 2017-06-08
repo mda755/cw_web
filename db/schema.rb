@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20170601193503) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "authors", ["index"], name: "index_authors_on_index", unique: true, using: :btree
+
   create_table "books", force: :cascade do |t|
     t.text     "name",        null: false
     t.integer  "part"
@@ -48,6 +50,7 @@ ActiveRecord::Schema.define(version: 20170601193503) do
     t.datetime "updated_at",  null: false
   end
 
+  add_index "books", ["isbn"], name: "index_books_on_isbn", unique: true, using: :btree
   add_index "books", ["stillage_id"], name: "index_books_on_stillage_id", using: :btree
 
   create_table "delayed_jobs", force: :cascade do |t|

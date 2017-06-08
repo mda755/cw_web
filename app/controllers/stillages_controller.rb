@@ -55,6 +55,8 @@ class StillagesController < ApplicationController
   # DELETE /stillages/1
   # DELETE /stillages/1.json
   def destroy
+    # будем удалять зал если удаляемый стеллаж последний 
+    @stillage.hall.destroy if @stillage.hall.stillages.pluck(:index).size == 1
     @stillage.destroy
     respond_to do |format|
       format.html { redirect_to stillages_url, notice: 'Stillage was successfully destroyed.' }

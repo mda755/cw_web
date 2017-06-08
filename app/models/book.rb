@@ -1,6 +1,6 @@
 class Book < ActiveRecord::Base
   belongs_to :stillage
-  has_many :author_lists, dependent: :destroy, inverse_of: :book
+  has_many :author_lists, dependent: :destroy
   has_many :authors, through: :author_lists
   
   validates :name, :isbn, :print_year, :stillage_id, :shelf, :copies, presence: true

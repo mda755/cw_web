@@ -3,11 +3,12 @@ class CreateBooks < ActiveRecord::Migration
     create_table :books do |t|
       t.text :name, null: false
       t.integer :part
-      t.integer :isbn, null: false, unique: true
+      t.integer :isbn, null: false
       t.integer :print_year, null: false
       t.references :stillage, index: true, foreign_key: true, null: false
       t.integer :shelf, null: false
       t.integer :copies, null: false
+      t.index :isbn, unique: true
 
       t.timestamps null: false
     end
